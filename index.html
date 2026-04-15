@@ -711,10 +711,6 @@
             <p>输入你的成绩区间，找到适合你的日本大学</p>
         </header>
         
-        <div class="rate-limit-banner" id="rateLimitBanner">
-            <span>⚠️</span>
-            <span id="rateLimitMsg">查询太频繁，请稍后再试</span>
-        </div>
         
         <div class="card">
             <h2>📊 填写你的EJU成绩区间</h2>
@@ -922,8 +918,6 @@
             const loading = document.getElementById('loading');
             const resultsCard = document.getElementById('resultsCard');
             const resultsList = document.getElementById('resultsList');
-            const rateLimitBanner = document.getElementById('rateLimitBanner');
-            
             // 收集分数
             const scores = collectScores();
             
@@ -941,14 +935,12 @@
             resultsCard.style.display = 'block';
             loading.classList.add('show');
             resultsList.innerHTML = '';
-            rateLimitBanner.classList.remove('show');
             
             try {
                 const response = await fetch('https://1422346498-5v8vl49zcl.ap-guangzhou.tencentscf.com/api/query', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-Device-ID': getDeviceId()
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ scores })
                 });
@@ -958,12 +950,6 @@
                 loading.classList.remove('show');
                 btn.disabled = false;
                 btn.innerHTML = '<span>🔍</span><span>查询可报考大学</span>';
-                
-                if (response.status === 429) {
-                    rateLimitBanner.classList.add('show');
-                    document.getElementById('rateLimitMsg').textContent = '查询太频繁，请稍后再试';
-                    return;
-                }
                 
                 if (data.error) {
                     resultsList.innerHTML = `<div class="error-state">${data.error}</div>`;
@@ -983,7 +969,7 @@
                 });
                 
                 document.getElementById('resultsCount').innerHTML = 
-                    `共找到 <strong>${Object.keys(universityGroups).length}</strong> 所大学 (${results.length}个学部) | 剩余查询次数: <strong>${data.remaining}</strong>`;
+                    `共找到 <strong>${Object.keys(universityGroups).length}</strong> 所大学 (${results.length}个学部)`;
                 
                 if (results.length === 0) {
                     resultsList.innerHTML = `
