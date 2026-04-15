@@ -804,30 +804,6 @@
                 </div>
             </div>
             
-            <div class="section-title">英语成绩（选填）</div>
-            <div class="form-grid">
-                <div class="score-range-group">
-                    <label class="score-range-label">TOEFL iBT</label>
-                    <div class="score-range-input">
-                        <input type="number" id="toefl_min" placeholder="最低" min="0" max="120">
-                        <span class="range-separator">~</span>
-                        <input type="number" id="toefl_max" placeholder="最高" min="0" max="120">
-                        <span class="unit">分</span>
-                    </div>
-                    <span class="form-hint">满分120分</span>
-                </div>
-                <div class="score-range-group">
-                    <label class="score-range-label">TOEIC</label>
-                    <div class="score-range-input">
-                        <input type="number" id="toeic_min" placeholder="最低" min="0" max="990">
-                        <span class="range-separator">~</span>
-                        <input type="number" id="toeic_max" placeholder="最高" min="0" max="990">
-                        <span class="unit">分</span>
-                    </div>
-                    <span class="form-hint">满分990分</span>
-                </div>
-            </div>
-            
             <div style="margin-top: 28px;">
                 <button class="btn btn-primary" id="searchBtn" onclick="search()">
                     <span>🔍</span>
@@ -880,7 +856,7 @@
         
         // 收集分数区间
         function collectScores() {
-            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology', 'toefl', 'toeic'];
+            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology'];
             const scores = {};
             
             fields.forEach(field => {
