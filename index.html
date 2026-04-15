@@ -728,7 +728,7 @@
                         <input type="number" id="japanese_max" placeholder="最高" min="0" max="400">
                         <span class="unit">分</span>
                     </div>
-                    <span class="form-hint">满分400分（记述另计）</span>
+                    <span class="form-hint">满分400分</span>
                 </div>
             </div>
             
@@ -801,20 +801,6 @@
                         <span class="unit">分</span>
                     </div>
                     <span class="form-hint">满分100分</span>
-                </div>
-            </div>
-            
-            <div class="section-title">记述（选填）</div>
-            <div class="form-grid">
-                <div class="score-range-group">
-                    <label class="score-range-label">记述</label>
-                    <div class="score-range-input">
-                        <input type="number" id="essay_min" placeholder="最低" min="0" max="50">
-                        <span class="range-separator">~</span>
-                        <input type="number" id="essay_max" placeholder="最高" min="0" max="50">
-                        <span class="unit">分</span>
-                    </div>
-                    <span class="form-hint">满分50分</span>
                 </div>
             </div>
             
@@ -894,7 +880,7 @@
         
         // 收集分数区间
         function collectScores() {
-            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology', 'essay', 'toefl', 'toeic'];
+            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology', 'toefl', 'toeic'];
             const scores = {};
             
             fields.forEach(field => {
