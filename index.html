@@ -708,14 +708,14 @@
     <div class="container">
         <header>
             <h1>🎌 EJU成绩选校查询</h1>
-            <p>输入你的成绩区间，找到适合你的日本大学</p>
+            <p>2024-2025年EJU合格数据分析，找到适合你的日本大学</p>
         </header>
         
         
         <div class="card">
             <h2>📊 填写你的EJU成绩区间</h2>
             <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                填写你的EJU成绩区间，找到匹配的大学
+                填写你的EJU成绩区间（2024-2025年数据），找到匹配的大学
             </p>
             
             <div class="section-title">必考科目</div>
@@ -804,6 +804,30 @@
                 </div>
             </div>
             
+            <div class="section-title">英语成绩（选填）</div>
+            <div class="form-grid">
+                <div class="score-range-group">
+                    <label class="score-range-label">TOEFL iBT</label>
+                    <div class="score-range-input">
+                        <input type="number" id="toefl_min" placeholder="最低" min="0" max="120">
+                        <span class="range-separator">~</span>
+                        <input type="number" id="toefl_max" placeholder="最高" min="0" max="120">
+                        <span class="unit">分</span>
+                    </div>
+                    <span class="form-hint">满分120分</span>
+                </div>
+                <div class="score-range-group">
+                    <label class="score-range-label">TOEIC</label>
+                    <div class="score-range-input">
+                        <input type="number" id="toeic_min" placeholder="最低" min="0" max="990">
+                        <span class="range-separator">~</span>
+                        <input type="number" id="toeic_max" placeholder="最高" min="0" max="990">
+                        <span class="unit">分</span>
+                    </div>
+                    <span class="form-hint">满分990分</span>
+                </div>
+            </div>
+            
             <div style="margin-top: 28px;">
                 <button class="btn btn-primary" id="searchBtn" onclick="search()">
                     <span>🔍</span>
@@ -838,7 +862,7 @@
         </div>
         
         <footer>
-            <p>数据基于历年EJU合格记录整理 · 仅供参考</p>
+            <p>数据基于2024-2025年EJU合格记录整理 · 仅供参考</p>
             
         </footer>
     </div>
@@ -856,7 +880,7 @@
         
         // 收集分数区间
         function collectScores() {
-            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology'];
+            const fields = ['japanese', 'general', 'math1', 'math2', 'physics', 'chemistry', 'biology', 'toefl', 'toeic'];
             const scores = {};
             
             fields.forEach(field => {
@@ -931,7 +955,7 @@
                 });
                 
                 document.getElementById('resultsCount').innerHTML = 
-                    `共找到 <strong>${Object.keys(universityGroups).length}</strong> 所大学 (${results.length}个学部)`;
+                    `共找到 <strong>${Object.keys(universityGroups).length}</strong> 所大学 (${results.length}个学部) · <span style="color:#999;font-size:0.8rem;">2024-2025年数据</span>`;
                 
                 if (results.length === 0) {
                     resultsList.innerHTML = `
@@ -947,7 +971,7 @@
                             <ul style="text-align: left; margin-top: 12px; padding-left: 24px; color: #555; font-size: 0.85rem; line-height: 1.8;">
                                 <li>减少搜索科目（建议只保留日语 + 1个科目）</li>
                                 <li>扩大分数区间（如 250-360 而非 280-300）</li>
-                                <li>注意：所有学部必须同时满足你设置的每个科目条件</li>
+                                <li>如果填写了TOEFL/TOEIC，部分学部可能没有英语数据，会不显示</li>
                             </ul>
                         </div>
                     `;
@@ -973,14 +997,15 @@
                             { key: '物理', label: '物理' },
                             { key: '化学', label: '化学' },
                             { key: '生物', label: '生物' },
-                            { key: '记述', label: '记述' }
+                            { key: 'TOEFL', label: 'TOEFL' },
+                            { key: 'TOEIC', label: 'TOEIC' }
                         ];
                         
                         for (const field of avgFields) {
                             const val = avgScores[field.key];
                             if (val !== null && val !== undefined) {
                                 // 检查这个科目是否在用户查询的区间内
-                                const isMatched = matchedFields && matchedFields[field.key];
+                                const isMatched = matchedFields && matchedFields.includes && matchedFields.includes(field.key);
                                 if (isMatched) {
                                     avgHtml += `<div class="score-item your-score"><span class="label">${field.label}</span><span class="value">${val}</span></div>`;
                                 } else {
@@ -994,6 +1019,7 @@
                             <div class="faculty-card">
                                 <div class="faculty-info">
                                     <div class="faculty-name">${f.学部}${f.学科 ? ' · ' + f.学科 : ''}</div>
+                                    <div style="font-size:0.7rem;color:#999;margin-bottom:4px;">2024-2025年平均分</div>
                                     ${avgHtml}
                                 </div>
                             </div>
