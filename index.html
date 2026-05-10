@@ -532,56 +532,6 @@
             color: #C62828;
         }
         
-        .wechat-section {
-            text-align: center;
-            margin: 30px auto;
-            padding: 25px;
-            background: rgba(255, 107, 53, 0.05);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            max-width: 500px;
-        }
-        
-        .wechat-title {
-            font-size: 1.3rem;
-            color: #FF6B35;
-            margin-bottom: 10px;
-        }
-        
-        .wechat-desc {
-            color: #888;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-        
-        .wechat-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .wechat-qr {
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-        }
-        
-        .wechat-info {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 12px;
-            padding: 15px 25px;
-        }
-        
-        .wechat-id {
-            color: #FF6B35;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        
         /* Rate limit banner */
         .rate-limit-banner {
             display: none;
@@ -851,16 +801,6 @@
             <div class="university-list" id="resultsList"></div>
         </div>
         
-        <div class="wechat-section" id="wechatSection" style="display: none;">
-            <div class="wechat-title" style="color: #FF6B35;">🎓 想要更详细的合格数据？</div>
-            <div class="wechat-desc">加微信免费获取：EJU升学数据 / 学部详细分数线 / 虾老师经验分享</div>
-            <div class="wechat-content">
-                <img src="/a2205b5de2c73e434b720f09f1292b8e.jpg" alt="微信二维码" class="wechat-qr">
-                <div class="wechat-info">
-                    <div class="wechat-id">微信号：Usokawai</div>
-                </div>
-            </div>
-        </div>
         
         <footer>
             <p>数据基于2024-2025年EJU合格记录整理 · 仅供参考</p>
@@ -1049,12 +989,6 @@
                 window.toggleUniversity = function(element) {
                     element.classList.toggle('expanded');
                 };
-                
-                // 有结果时显示微信区域
-                const wechatSection = document.getElementById('wechatSection');
-                if (wechatSection) {
-                    wechatSection.style.display = 'block';
-                }
                 
             } catch (error) {
                 loading.classList.remove('show');
